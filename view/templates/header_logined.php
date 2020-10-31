@@ -28,7 +28,7 @@
       <p class="my-2">ようこそ、<?php print($user['name']); ?>さん。</p>
       
 
-      <form class="form-inline my-2 my-lg-0" method="get" action="/index.php">
+      <form class="form-inline my-2 my-lg-0" method="get" action="/home.php">
         <select class="form-control mr-sm-2" name="pulldown">
           <option value="新着順">新着順</option>
           <option value="価格の安い順">価格の安い順</option>

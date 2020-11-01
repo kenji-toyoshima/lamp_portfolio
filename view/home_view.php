@@ -14,6 +14,8 @@
     <h1>商品一覧</h1>
     <?php include VIEW_PATH . 'templates/messages.php'; ?>
 
+
+
     <div class="card-deck">
       <div class="row">
       <?php foreach($items as $item){ ?>
@@ -43,6 +45,44 @@
       <?php } ?>
       </div>
     </div>
+
+    <nav aria-label="Page navigation" class="mt-5">
+      <ul class="pagination pagination-lg">
+        <li class="page-item
+        <?php 
+            if($page==1){
+              print("disabled");
+            }
+          ?>
+        ">
+          
+          <a class="page-link" href="home.php?page=<?php print($page-1); ?>">Prev</a>
+        </li>
+
+    <?php
+        for ($i = 1; $i <= $total_page; $i++) {
+    ?>
+        <li 
+          class="page-item 
+          <?php 
+            if($i == $page){
+              print("active");
+            }
+          ?>
+        ">
+        <a class="page-link" href="home.php?page=<?php print($i); ?>"><?php print($i); ?></a></li>
+    <?php
+        }
+    ?>
+      <li class="page-item
+        <?php 
+            if($page==$total_page){
+              print("disabled");
+            }
+        ?>
+      ">
+        <a class="page-link" href="home.php?page=<?php print($page+1); ?>">Next</a>
+      </li>
   </div>
   
 </body>

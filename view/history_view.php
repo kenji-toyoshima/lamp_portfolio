@@ -18,6 +18,7 @@
         <thead class="thead-light">
           <tr>
             <th>注文番号</th>
+            <th>ユーザーID</th>
             <th>購入日時</th>
             <th>合計金額</th>
             <th>購入明細</th>
@@ -27,6 +28,7 @@
           <?php foreach($histories as $history){ ?>
           <tr>
             <td><?php print($history['order_id']); ?></td>
+            <td><?php print($history['user_id']); ?></td>
             <td><?php print($history['purchase_datetime']); ?></td>
             <td><?php print number_format($history['total']); ?>円</td>
             <td>

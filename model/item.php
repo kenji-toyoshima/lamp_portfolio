@@ -62,8 +62,68 @@ function get_items($db, $is_open = false, $pulldown = '新着順'){
   }
 
 
+  //$sqlの内容を実行し、全行のレコードを取得 <db.phpを参照>
+  return fetch_all_query($db, $sql, $param);
+}
+
+
+//itemsテーブルから8こずつデータを取得 
+function get_pagenation_items($db,$page, $is_open = TRUE, $pulldown = '新着順'){
+  $sql = '
+    SELECT
+      item_id, 
+      name,
+      stock,
+      price,
+      image,
+      status
+    FROM
+      items
+  ';
+  if($is_open === true){
+    $sql .= '
+      WHERE status = 1
+    ';
+  }
+  if($pulldown === '新着順'){
+    $sql .= '
+    ORDER BY
+      item_id DESC
+    ';
+  }
+  elseif($pulldown === '価格の安い順'){
+    $sql .= '
+    ORDER BY
+      price ASC
+    ';
+  }
+  elseif($pulldown === '価格の高い順'){
+    $sql .= '
+    ORDER BY
+      price DESC
+    ';
+  }
+  if(isset($page) === true){
+    $sql .= '
+      LIMIT ?,8
+    ';
+  }
+  $param = [$page];
 
   //$sqlの内容を実行し、全行のレコードを取得 <db.phpを参照>
+  return fetch_all_query($db, $sql, $param);
+}
+
+function get_count_item($db){
+  $sql = "
+    SELECT
+      count(*)
+    FROM
+      items
+    WHERE
+      status=1
+  ";
+  //$sqlの内容を実行し、1行だけレコードを取得 <db.phpを参照>
   return fetch_all_query($db, $sql);
 }
 
@@ -83,6 +143,8 @@ function get_open_items($db){
 function get_pulldown_items($db,$pulldown){
   return get_items($db, true, $pulldown);
 }
+
+
 
 //商品登録
 function regist_item($db, $name, $price, $stock, $status, $image){
@@ -305,8 +367,10 @@ function get_history($db, $user_id){
     $sql = "
       SELECT 
         purchase_history.order_id,
+        user_id,
         purchase_datetime,
         sum(price*amount) as total
+        
       FROM
         purchase_history
         INNER JOIN

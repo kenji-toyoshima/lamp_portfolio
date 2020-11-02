@@ -12,4 +12,4 @@
     <li>ページング機能、並び替え機能</li>
 </ul>
 
-<p><a href="home.php">ポートフォリオリンク</a></p>
+<p><a href="https://toyoken-blog.com/">ポートフォリオリンク</a></p>

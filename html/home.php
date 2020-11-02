@@ -24,10 +24,12 @@ if(isset($_GET['pulldown']) === TRUE){
 
 }
 
-//デフォルトは１ページ
-$page=1;
+
 //$_GET['page']に値が入っていればその値を取得
 $page = get_get('page');
+if($page===""){
+  $page=1;
+}
 
 
 //配列から商品数を取り出す

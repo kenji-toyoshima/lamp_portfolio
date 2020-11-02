@@ -48,14 +48,7 @@
 
     <nav aria-label="Page navigation" class="mt-5">
       <ul class="pagination pagination-lg">
-        <li class="page-item
-        <?php 
-            if($page==1){
-              print("disabled");
-            }
-          ?>
-        ">
-          
+        <li class="page-item <?php $page==1 ? print "disabled": print ""; ?>">
           <a class="page-link" href="home.php?page=<?php print($page-1); ?>">Prev</a>
         </li>
 
